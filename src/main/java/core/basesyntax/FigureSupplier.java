@@ -4,48 +4,37 @@ import java.util.Random;
 
 public class FigureSupplier {
     private static final int MAX_SIZE = 10;
+    private static final int FIGURE_TYPES = 5; // total number of figure types
+    private final ColorSupplier colorSupplier = new ColorSupplier();
+    private final Random random = new Random();
 
     public Figure getDefaultFigure() {
         return new Circle("White", 10);
     }
 
     public Figure getRandomFigure() {
-        Random random = new Random();
-        int figureType = random.nextInt(5); // 5 типов фигур
-        String color = getRandomColor();
+        String color = colorSupplier.getRandomColor();
+
+        // Generate random dimensions
+        int size1 = random.nextInt(MAX_SIZE) + 1;
+        int size2 = random.nextInt(MAX_SIZE) + 1;
+        int size3 = random.nextInt(MAX_SIZE) + 1;
+
+        int figureType = random.nextInt(FIGURE_TYPES);
 
         switch (figureType) {
             case 0:
-                return new Circle(color, random.nextInt(MAX_SIZE) + 1);
+                return new Circle(color, size1);
             case 1:
-                return new Square(color, random.nextInt(MAX_SIZE) + 1);
+                return new Square(color, size1);
             case 2:
-                return new Rectangle(
-                        color,
-                        random.nextInt(MAX_SIZE) + 1,
-                        random.nextInt(MAX_SIZE) + 1
-                );
+                return new Rectangle(color, size1, size2);
             case 3:
-                return new RightTriangle(
-                        color,
-                        random.nextInt(MAX_SIZE) + 1,
-                        random.nextInt(MAX_SIZE) + 1
-                );
+                return new RightTriangle(color, size1, size2);
             case 4:
-                return new IsoscelesTrapezoid(
-                        color,
-                        random.nextInt(MAX_SIZE) + 1,
-                        random.nextInt(MAX_SIZE) + 1,
-                        random.nextInt(MAX_SIZE) + 1
-                );
+                return new IsoscelesTrapezoid(color, size1, size2, size3);
             default:
                 return getDefaultFigure();
         }
-    }
-
-    private String getRandomColor() {
-        String[] colors = {"Red", "Blue", "Green", "Yellow", "Black", "White"};
-        Random random = new Random();
-        return colors[random.nextInt(colors.length)];
     }
 }
