@@ -4,12 +4,15 @@ import java.util.Random;
 
 public class FigureSupplier {
     private static final int MAX_SIZE = 10;
-    private static final int FIGURE_TYPES = 5; // total number of figure types
+    private static final int FIGURE_TYPES = 5;
+    private static final String DEFAULT_COLOR = "White";
+    private static final int DEFAULT_SIZE = 10;
+
     private final ColorSupplier colorSupplier = new ColorSupplier();
     private final Random random = new Random();
 
     public Figure getDefaultFigure() {
-        return new Circle("White", 10);
+        return new Circle(DEFAULT_COLOR, DEFAULT_SIZE);
     }
 
     public Figure getRandomFigure() {
